@@ -1,6 +1,6 @@
 import { Storage } from 'aws-amplify';
 
-const s3Upload = async (file) => {
+export const s3Upload = async (file) => {
   const filename = `${Date.now()}-${file.name}`;
 
   const stored = await Storage.vault.put(filename, file, {
@@ -10,4 +10,4 @@ const s3Upload = async (file) => {
   return stored.key;
 };
 
-export default s3Upload;
+export default {};

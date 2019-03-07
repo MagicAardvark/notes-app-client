@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { FormGroup, FormControl, ControlLabel } from 'react-bootstrap';
 import { API } from 'aws-amplify';
+import { s3Upload } from '../libs/awsLib';
 import LoaderButton from '../components/LoaderButton';
 import config from '../config';
 import './NewNote.scss';
@@ -50,7 +51,12 @@ export default class NewNote extends Component {
     const { content } = { ...this.state };
     const { history } = { ...this.props };
     try {
+      const attachment = this.file
+        ? await s3Upload(this.file)
+        : null;
+      console.log('attachment', attachment);
       await this.createNote({
+        attachment,
         content,
       });
       history.push('/');
@@ -63,6 +69,7 @@ export default class NewNote extends Component {
   // TODO: work out a fix
   // eslint-disable-next-line class-methods-use-this
   createNote(note) {
+    console.log('note', note);
     return API.post('notes', '/notes', {
       body: note,
     });
