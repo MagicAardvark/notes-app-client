@@ -10,4 +10,9 @@ export const s3Upload = async (file) => {
   return stored.key;
 };
 
+export const s3Delete = async (file) => {
+  const removed = await Storage.vault.remove(file.name);
+  return removed;
+};
+
 export default {};
