@@ -40,8 +40,8 @@ class Login extends Component {
       await Auth.signIn(email, password);
       console.log('signed in');
       console.log('navigating');
-      history.push('/');
       userHasAuthenticated(true);
+      history.push('/');
     } catch (e) {
       // alert(e.message);
       this.setState({ isLoading: false });
