@@ -54,7 +54,7 @@ export default class NewNote extends Component {
       const attachment = this.file
         ? await s3Upload(this.file)
         : null;
-      console.log('attachment', attachment);
+
       await this.createNote({
         attachment,
         content,
@@ -69,7 +69,6 @@ export default class NewNote extends Component {
   // TODO: work out a fix
   // eslint-disable-next-line class-methods-use-this
   createNote(note) {
-    console.log('note', note);
     return API.post('notes', '/notes', {
       body: note,
     });

@@ -32,16 +32,13 @@ class Login extends Component {
   async handleSubmit(event) {
     event.preventDefault();
     const { email, password } = { ...this.state };
-    const { userHasAuthenticated, history } = { ...this.props };
-    console.log(history, this.props);
+    const { userHasAuthenticated } = { ...this.props };
+
     this.setState({ isLoading: true });
 
     try {
       await Auth.signIn(email, password);
-      console.log('signed in');
-      console.log('navigating');
       userHasAuthenticated(true);
-      history.push('/');
     } catch (e) {
       // alert(e.message);
       this.setState({ isLoading: false });

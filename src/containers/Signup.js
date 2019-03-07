@@ -58,12 +58,11 @@ export default class Signup extends Component {
         username: email,
         password,
       });
-      console.log('newUser', newUser);
+
       this.setState({
         newUser,
       });
     } catch (e) {
-      console.log('e', e);
       if (e.code === 'UsernameExistsException') {
         this.signUpFailure();
       } else alert(e.message);
@@ -92,13 +91,12 @@ export default class Signup extends Component {
     this.setState({ isLoading: true });
 
     const { email, password, confirmationCode } = { ...this.state };
-    const { userHasAuthenticated, history } = { ...this.props };
+    const { userHasAuthenticated } = { ...this.props };
     try {
       await Auth.confirmSignUp(email, confirmationCode);
       await Auth.signIn(email, password);
 
       userHasAuthenticated(true);
-      history.push('/');
     } catch (e) {
       alert(e.message);
       this.setState({ isLoading: false });
