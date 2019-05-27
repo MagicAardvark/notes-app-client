@@ -16,6 +16,7 @@ class App extends Component {
     };
 
     this.handleLogout = this.handleLogout.bind(this);
+    this.userHasAuthenticated = this.userHasAuthenticated.bind(this);
   }
 
   async componentDidMount() {
@@ -44,9 +45,10 @@ class App extends Component {
 
   render() {
     const { isAuthenticated, isAuthenticating } = { ...this.state };
+
     const childProps = {
       isAuthenticated,
-      userHasAuthenticated: this.userHasAuthenticated.bind(this),
+      userHasAuthenticated: this.userHasAuthenticated,
     };
 
     return (
@@ -62,19 +64,26 @@ class App extends Component {
           <Navbar.Collapse>
             <Nav pullRight>
               {
-              isAuthenticated
-                ? <NavItem onClick={this.handleLogout}>Logout</NavItem>
-                : (
-                  <Fragment>
-                    <LinkContainer to="/signup">
-                      <NavItem>Signup</NavItem>
-                    </LinkContainer>
-                    <LinkContainer to="/login">
-                      <NavItem>Login</NavItem>
-                    </LinkContainer>
-                  </Fragment>
-                )
-            }
+                isAuthenticated
+                  ? (
+                    <Fragment>
+                      <LinkContainer to="/settings">
+                        <NavItem>Settings</NavItem>
+                      </LinkContainer>
+                      <NavItem onClick={this.handleLogout}>Logout</NavItem>
+                    </Fragment>
+                  )
+                  : (
+                    <Fragment>
+                      <LinkContainer to="/signup">
+                        <NavItem>Signup</NavItem>
+                      </LinkContainer>
+                      <LinkContainer to="/login">
+                        <NavItem>Login</NavItem>
+                      </LinkContainer>
+                    </Fragment>
+                  )
+              }
             </Nav>
           </Navbar.Collapse>
         </Navbar>
