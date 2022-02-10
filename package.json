@@ -4,7 +4,7 @@
   "private": true,
   "dependencies": {
     "aws-amplify": "^1.1.22",
-    "node-sass": "^4.11.0",
+    "node-sass": "^7.0.0",
     "prop-types": "^15.7.2",
     "react": "^16.8.4",
     "react-bootstrap": "^0.32.4",
